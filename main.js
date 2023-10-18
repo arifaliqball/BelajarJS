@@ -67,3 +67,51 @@
 //     console.log(isi)
 //     p.innerText = isi
 // })
+
+let button = document.querySelector("button");
+let input = document.querySelector("input");
+
+button.addEventListener('click', function () {
+    let isi = input.value;
+    if (isi) {
+        const taskContainer = document.createElement("div");
+        taskContainer.classList.add("task-container");
+        taskContainer.style.display = "flex"; 
+        taskContainer.style.alignItems = "center"; 
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.classList.add("task-checkbox");
+        checkbox.addEventListener("change", function () {
+            if (this.checked) {
+                taskText.style.textDecoration = "line-through";
+            }
+            else {
+                taskText.style.textDecoration = "none";
+            }
+        });
+
+        const taskText = document.createElement("span");
+        taskText.classList.add("task-text");
+        taskText.innerText = isi;
+        taskText.style.flex = "1"; 
+
+        const removeButton = document.createElement("button");
+        removeButton.innerText = "X";
+        removeButton.classList.add("remove-button");
+        removeButton.addEventListener("click", function () {
+            taskText.style.textDecoration = "none";
+        });
+
+        checkbox.style.marginRight = "10px";
+        removeButton.style.marginRight = "1000px";
+
+        taskContainer.appendChild(checkbox);
+        taskContainer.appendChild(taskText);
+        taskContainer.appendChild(removeButton);
+
+        document.body.appendChild(taskContainer);
+
+        input.value = "";
+    }
+});
